@@ -39,11 +39,11 @@ class DockerInstall extends Command
 
             if ( ! $this->confirm('Do you want to overwrite all the configuration?') )
                 return;
-
-            $this->info('Publishing Configuration');
-
-            $this->call('vendor:publish', ['--provider' => 'Vivasoft\LaravelDocker\ServiceProvider']);
         }
+
+        $this->info('Publishing Configuration');
+
+        $this->call('vendor:publish', ['--provider' => 'Vivasoft\LaravelDocker\ServiceProvider']);
     }
 
     private function isDockerComposeExists()

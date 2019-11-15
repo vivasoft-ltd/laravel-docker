@@ -1,0 +1,30 @@
+{
+  "name": "vivasoft/laravel-docker",
+  "description": "Laravel Docker",
+  "keywords": ["laravel", "vivasoft"],
+  "license": "MIT",
+  "type": "library",
+  "authors": [
+    {
+      "name": "Faisal Islam",
+      "email": "faisal.islam@vivacomsolutions.com"
+    }
+  ],
+  "require": {
+    "php": ">=7.2",
+    "illuminate/support": "~6"
+  },
+  "autoload": {
+    "psr-4": {
+      "Vivasoft\\LaravelDocker\\": "src/"
+    }
+  },
+  "extra": {
+    "laravel": {
+      "providers": [
+        "Vivasoft\\LaravelDocker\\ServiceProvider"
+      ]
+    }
+  },
+  "minimum-stability": "dev"
+}

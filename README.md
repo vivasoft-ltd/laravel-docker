@@ -12,11 +12,11 @@ We provided most of the require tools to run a general laravel application. But,
 - [Option 2: Use with existing project](#use-with-existing-project)
 - [Modify your `.env` file](#modify-environment-file)
 - __Docker Compose:__
-    - [PHP](#php-container)
-    - [Database](#database-container)
-    - [Nginx](#nginx-container)
-    - [Redis](#redis-container)
-- [Advanced](#advanced)    
+    - [PHP](#php)
+    - [Database](#database)
+    - [Nginx](#nginx)
+    - [Redis](#redis)
+- [Advanced](#advance-usages)
 
 ## Prerequisite
 
@@ -48,9 +48,9 @@ A new folder `.docker` along with two other files `docker-compose.yml` and `Dock
 ---
 **NOTE**
 
-Before building the docker image you should update your [database](#database-container) credential.
+Before building the docker image you should update your [database](#database) credential.
 
-For [advanced usages](#advanced) you may want to update your [nginx](#database-container) configuration.
+For [advanced usages](#advance-usages) you may want to update your [nginx](#nginx) configuration.
 
 ---
 
@@ -83,9 +83,9 @@ A new folder `.docker` along with two other files `docker-compose.yml` and `Dock
 ---
 **NOTE**
 
-Before building the docker image you should update your [database](#database-container) credential.
+Before building the docker image you should update your [database](#database) credential.
 
-For [advanced usages](#advanced) you may want to update your [nginx](#database-container) configuration.
+For [advanced usages](#advance-usages) you may want to update your [nginx](#nginx) configuration.
 
 ---
 
@@ -130,7 +130,7 @@ The `DB_DATABASE` should be same as `MYSQL_DATABASE`. <br>
 The `DB_PORT` should be same as `3306`. <br>
 The `DB_PASSWORD` should be same as `MYSQL_ROOT_PASSWORD`. <br>
 
-See the [advanced usages](#database-container) section for more options.
+See the [advanced usages](#database) section for more options.
 
 **EXAMPLE**
 
@@ -155,6 +155,105 @@ DB_DATABASE=one_database
 DB_USERNAME=root
 DB_PASSWORD=root
 ```
+
+## PHP
+
+Default `PHP` settings:
+```yaml
+  #PHP
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: vivasoft/php
+    container_name: app
+    restart: unless-stopped
+    tty: true
+    environment:
+      SERVICE_NAME: app
+      SERVICE_TAGS: dev
+    working_dir: /var/www
+    volumes:
+      - ./:/var/www
+      - ./.docker/php/local.ini:/usr/local/etc/php/conf.d/local.ini
+    networks:
+      - app-network
+```
+
+- __`php.ini:`__ you can modify or add any settings on your host machine's `.docker/php/local.ini` file and it should apply the changes on your application.
+- __`Dockerfile:`__ contains all the require tools to build the `vivasoft/php` image. If you need any __additional piece of software__ or another __php extension__ you can easily add them in this file.
+See the [official documentation](https://docs.docker.com/engine/reference/builder/) for more information. After modifying the file you have to rebuild the image. 
+
+## Database
+
+__Default__ settings:
+```yaml
+  #MySQL
+  db:
+    image: mysql:5.7.28
+    container_name: db
+    restart: unless-stopped
+    tty: true
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_DATABASE: one_database
+      MYSQL_ROOT_PASSWORD: root
+      
+      MYSQL_USER: homestead
+      MYSQL_PASSWORD: secret
+      
+      SERVICE_TAGS: dev
+      SERVICE_NAME: mysql
+    volumes:
+      - dbdata:/var/lib/mysql
+      - ./.docker/mysql/my.cnf:/etc/mysql/my.cnf
+    networks:
+      - app-network
+```
+
+- You can use more `environment` variables. `MYSQL_USER` and `MYSQL_PASSWORD` are most important among them.
+
+See more option on [docker mysql official](https://hub.docker.com/_/mysql) page.
+
+## Nginx
+
+__Default__ settings:
+```yaml
+  #Nginx
+  webserver:
+    image: nginx:latest
+    container_name: webserver
+    restart: unless-stopped
+    tty: true
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./:/var/www
+      - ./.docker/nginx/conf.d/:/etc/nginx/conf.d/
+    networks:
+      - app-network
+```
+__Run application into another ports:__ update the `docker-compose.yml` file.
+```yaml
+  #Nginx
+  webserver:
+    ...
+    ports:
+      - "YOUR_PORT:80"
+      - "443:443"
+    ...
+```
+__Add SSL Certificate__: Coming Soon.
+
+## Redis
+
+## Advance Usages
+
+__Rebuilding Image:__
+- You can rebuild the image using `docker-compose up -d --build` command.
+
 
 ## License
 

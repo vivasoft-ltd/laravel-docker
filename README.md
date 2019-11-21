@@ -24,6 +24,11 @@ it also provides flexibility to customize your container based on your need.
     - [Running `php artisan` command](#running-php-artisan-command)
     - [Connect To Database](#connect-to-database)
 - [Advance Usages](#advance-usages)
+- [Troubleshooting](#troubleshooting)
+- [Deployment](#deployment)
+    - [AWS]
+    - [Linode]
+    - [Digital Ocean]
 
 ## Prerequisite
 
@@ -291,6 +296,16 @@ The `DB_PASSWORD` should be `MYSQL_ROOT_PASSWORD` or `MYSQL_PASSWORD`. <br>
 
 __Rebuilding Image:__
 - You can rebuild the image using `docker-compose up -d --build` command.
+
+**Coming Soon**
+
+## Troubleshooting
+
+- __Command Prompt for Windows User__:
+    - Windows user should use __Power Shell__.
+    - If you want to use command prompt instead of __Power Shell__, you have to specify the __path__ e.g: "(c:\User\ProjectPath)" instead of `${PWD}`.
+
+## Deployment
 
 **Coming Soon**
 

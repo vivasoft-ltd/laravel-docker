@@ -36,6 +36,13 @@ it also provides flexibility to customize your container based on your need.
 
 ## Use with new laravel installation
 
+---
+**#Installation Process:**
+
+__Youtube link:__ https://youtu.be/7qyH4sO3mcs
+
+---
+
 __Step 1:__ <br>
 Open your terminal, navigate to your project directory and run the following command to install the latest version.
 

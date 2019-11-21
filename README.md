@@ -3,8 +3,8 @@
 [Vivasoft Ltd](http://www.vivasoftltd.com)
 
 If you want to use [docker](https://www.docker.com) with your laravel project, this package will help you to create the container. 
-It provides most of the require software to run a laravel application. 
-But it provides flexibility to customize your container based on your need.
+It contains most of the require software to run a laravel application; 
+it also provides flexibility to customize your container based on your need.
 
 ## Table of contents
 

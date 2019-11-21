@@ -1,6 +1,6 @@
 {
   "name": "vivasoft/laravel-docker",
-  "description": "If you want to use docker with your laravel project, this package will help you to create the container. It provides most of the require software to run a laravel application. But it provides flexibility to customize your container based on your need.",
+  "description": "If you want to use docker with your laravel project, this package will help you to create the container. It contains most of the require software to run a laravel application; it also provides flexibility to customize your container based on your need.",
   "keywords": ["laravel", "docker", "vivasoft"],
   "license": "MIT",
   "type": "library",

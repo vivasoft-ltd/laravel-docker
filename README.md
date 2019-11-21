@@ -266,7 +266,7 @@ __Add SSL Certificate__: Coming Soon.
 When your container up and running. You can SSH into your container by using the following command:
 
 ```bash
-docker exec -it bash CONTAINER_NAME
+docker exec -it CONTAINER_NAME bash
 ```
 
 ## Running `php artisan` command
@@ -304,7 +304,11 @@ __Rebuilding Image:__
 - __Command Prompt for Windows User__:
     - Windows user should use __Power Shell__.
     - If you want to use command prompt instead of __Power Shell__, you have to specify the __path__ e.g: "(c:\User\ProjectPath)" instead of `${PWD}`.
-
+- __Got permission denied while trying to connect to the Docker daemon socket__
+    - [See Digital Ocean Community Answer](https://www.digitalocean.com/community/questions/how-to-fix-docker-got-permission-denied-while-trying-to-connect-to-the-docker-daemon-socket)
+- __PORT Binding Error__:
+    - Open `docker-compose.yml` file and update `host` machine port. (Example: See [nginx](#nginx) run application into another ports.)
+         
 ## Deployment
 
 **Coming Soon**

@@ -1,22 +1,29 @@
 ## Laravel Docker
 
-- Author: [Vivasoft Ltd](http://www.vivasoftltd.com)
+[Vivasoft Ltd](http://www.vivasoftltd.com)
 
-If you want to use [Docker](https://www.docker.com) for your laravel project, this package will help you to create the container.
-We provided most of the require tools to run a general laravel application. But, you will able to customize your container based on your need.
+If you want to use [docker](https://www.docker.com) with your laravel project, this package will help you to create the container. 
+It provides most of the require software to run a laravel application. 
+But it provides flexibility to customize your container based on your need.
 
 ## Table of contents
 
 - [Prerequisite](#prerequisite)
-- [Option 1: Use with new project](#use-with-new-laravel-installation)
-- [Option 2: Use with existing project](#use-with-existing-project)
-- [Modify your `.env` file](#modify-environment-file)
-- __Docker Compose:__
+- __Installation & Setup:__
+    - __Install:__
+        - [With a new project](#use-with-new-laravel-installation)
+        - [Or, into an existing project](#use-with-existing-project)
+    - [Update `.env` file](#update-env-file)
+- __Docker Compose Settings:__
     - [PHP](#php)
     - [Database](#database)
     - [Nginx](#nginx)
     - [Redis](#redis)
-- [Advanced](#advance-usages)
+- __Daily Usages:__
+    - [Connecting Via SSH](#connecting-via-ssh)
+    - [Running `php artisan` command](#running-php-artisan-command)
+    - [Connect To Database](#connect-to-database)
+- [Advance Usages](#advance-usages)
 
 ## Prerequisite
 
@@ -63,7 +70,7 @@ docker-compose up -d
 It may take some time, so grab a cup of :coffee: :grimacing:
 
 
-When done - [update your `.env` file](#modify-environment-file) and visit your IP address: http://your_ipaddress:port [default is: 80]
+When done - [update your `.env` file](#update-env-file) and visit your IP address: http://your_ipaddress:port [default is: 80]
 
 ## Use with existing project
 
@@ -95,9 +102,9 @@ Run the application:
 docker-compose up -d
 ```
 
-When done - [update your `.env` file](#modify-environment-file) and visit your IP address: http://your_ipaddress:port [default is: 80]
+When done - [update your `.env` file](#update-env-file) and visit your IP address: http://your_ipaddress:port [default is: 80]
 
-## Modify environment file
+## Update `.env` file
 
 Open your `docker-compose.yml` file and use the related value. 
 
@@ -182,7 +189,7 @@ Default `PHP` settings:
 
 - __`php.ini:`__ you can modify or add any settings on your host machine's `.docker/php/local.ini` file and it should apply the changes on your application.
 - __`Dockerfile:`__ contains all the require tools to build the `vivasoft/php` image. If you need any __additional piece of software__ or another __php extension__ you can easily add them in this file.
-See the [official documentation](https://docs.docker.com/engine/reference/builder/) for more information. After modifying the file you have to rebuild the image. 
+See the [official documentation](https://docs.docker.com/engine/reference/builder/) for more information. After modifying the file you have to [rebuild](#advance-usages) the image. 
 
 ## Database
 
@@ -241,7 +248,7 @@ __Run application into another ports:__ update the `docker-compose.yml` file.
   webserver:
     ...
     ports:
-      - "YOUR_PORT:80"
+      - "NEW_PORT:80"
       - "443:443"
     ...
 ```
@@ -249,11 +256,48 @@ __Add SSL Certificate__: Coming Soon.
 
 ## Redis
 
+## Connecting via SSH
+
+When your container up and running. You can SSH into your container by using the following command:
+
+```bash
+docker exec -it bash CONTAINER_NAME
+```
+
+## Running `php artisan` command
+
+There are two options to execute your `php artisan` command.
+
+__Option 1__: <br>
+Run the following command from your project root directory.
+```bash
+docker-compose exec app php artisan
+```
+**n.b:** `app` is name of your PHP container.
+
+__Option 2__: [SSH](#connecting-via-ssh) into your PHP container then run `php artisan`
+
+## Connect To Database
+
+See [Update `.env` file](#update-env-file) section for current settings:
+
+The `DB_HOST` should be your __IP Address__ <br>
+The `DB_DATABASE` should be `MYSQL_DATABASE`. <br>
+The `DB_PORT` should be same as `3306`. <br>
+The `DB_USERNAME` should be `MYSQL_ROOT_PASSWORD` or `MYSQL_USER` <br>
+The `DB_PASSWORD` should be `MYSQL_ROOT_PASSWORD` or `MYSQL_PASSWORD`. <br>
+
 ## Advance Usages
 
 __Rebuilding Image:__
 - You can rebuild the image using `docker-compose up -d --build` command.
 
+**Coming Soon**
+
+## Contributor
+
+ - [Faisal Islam](https://github.com/nscreed)
+ - [Sazedul Islam](https://github.com/sazid1462)
 
 ## License
 
